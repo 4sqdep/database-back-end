@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'db_config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'gidroqurilish',
+        'USER': 'erkin',
+        'PASSWORD': 'erkinMac1998$',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -130,8 +134,7 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = 'media'
 
-
-
+AUTH_USER_MODEL = "account.User"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
