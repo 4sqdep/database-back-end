@@ -22,9 +22,9 @@ from .yasg import urlpatterns as doc_urls
 
 urlpatterns = [
     path('hccsadmin/', admin.site.urls),
-    # path('api/', include([
-    #     path('')
-    # ]))
+    path('api/', include([
+        path('', include("account.urls"))
+    ]))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += doc_urls

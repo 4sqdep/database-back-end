@@ -20,3 +20,13 @@ class RegistrationAPIView(APIView):
         user.save()
         return Response({'message': "Foydalanuvchi ro'yxatdan o'tkazildi"},
                         status=status.HTTP_201_CREATED)
+
+
+class LoginView(TokenObtainPairView):
+    """
+    Foydalanuvchi tizimga kirish uchun
+    """
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = LoginSerializers
+
+user_login_api_view = LoginView().as_view()
