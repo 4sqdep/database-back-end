@@ -9,7 +9,7 @@
       }
     },
     {
-      "src": "./build_files.sh",
+      "src": "build_files.sh",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "staticfiles"
@@ -23,7 +23,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "db_config/wsgi.py"
+      "dest": "/manage.py"
     }
   ]
 }
