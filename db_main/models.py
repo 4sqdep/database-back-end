@@ -36,3 +36,38 @@ class SubCategories(models.Model):
     class Meta:
         verbose_name = "Pastgi Kategoriya"
         verbose_name_plural = "Pastgi Kategoriyalar"
+
+
+class Projects(models.Model):
+    """
+    Loyihalar uchun model
+    """
+    subcategories = models.ForeignKey(SubCategories, on_delete=models.SET_NULL, blank=True, null=True,
+                                      verbose_name="Pastgi Kategoriyalar")
+    name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Nomi", db_index=True)
+    subject = models.TextField(verbose_name="Izoh")
+    files = models.ManyToManyField("Files", verbose_name="Loyiha fayillari")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Kiritilgan vaqti")
+
+    def __str__(self):
+        return f"{self.subcategories} -- {self.name}"
+
+    class Meta:
+        verbose_name = "Loyiha"
+        verbose_name_plural = "Loyihalar"
+
+
+class Files(models.Model):
+    """
+    Loyiha Fayllari uchun model
+    """
+    file_code = models.CharField(max_length=25, verbose_name="Fayil Kodi")
+    file = models.FileField(upload_to="file", verbose_name="Fayl")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Kiritilgan vaqti")
+
+    def __str__(self):
+        return f"Fayil kodi: {self.file_code}"
+
+    class Meta:
+        verbose_name = "Fayil"
+        verbose_name_plural = "Loyiha Fayillari"
