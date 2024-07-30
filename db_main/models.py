@@ -12,7 +12,7 @@ class Categories(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Kiritilgan vaqti")
 
     def __str__(self):
-        return f"{self.user} -- {self.name}"
+        return f"{self.name}"
 
     class Meta:
         verbose_name = "Kategoriya"
@@ -25,13 +25,13 @@ class SubCategories(models.Model):
     """
     categories = models.ForeignKey(Categories, on_delete=models.SET_NULL, blank=True, null=True,
                                    verbose_name="Kategoriyalar")
-    name = models.CharField(max_length=500, blank=True, null=True, verbose_name="Nomi", db_index=True)
+    name = models.CharField(max_length=500, blank=True, null=True, verbose_name="Pastgi Kategoriya", db_index=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True,
                                verbose_name="Pastgi Kategoriyalar bolalari")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Kiritilgan vaqti")
 
     def __str__(self):
-        return f"{self.categories} -- {self.name}"
+        return f"{self.categories.name} -- {self.parent} -- {self.name}"
 
     class Meta:
         verbose_name = "Pastgi Kategoriya"

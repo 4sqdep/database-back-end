@@ -23,7 +23,8 @@ from .yasg import urlpatterns as doc_urls
 urlpatterns = [
     path('hccsadmin/', admin.site.urls),
     path('api/', include([
-        path('', include("account.urls"))
+        path('', include("account.urls")),
+        path('main/', include("db_main.urls"))
     ]))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

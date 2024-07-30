@@ -24,7 +24,7 @@ class User(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Ro'yxatdan o'tgan vaqti")
 
     def __str__(self):
-        return self.first_name
+        return self.username
 
     class Meta:
         verbose_name = "Foydalanuvchi"
