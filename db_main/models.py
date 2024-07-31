@@ -31,7 +31,7 @@ class SubCategories(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Kiritilgan vaqti")
 
     def __str__(self):
-        return f"{self.categories.name} -- {self.parent} -- {self.name}"
+        return f"{self.categories} -- {self.parent} -- {self.name}"
 
     class Meta:
         verbose_name = "Pastgi Kategoriya"
@@ -44,6 +44,8 @@ class Projects(models.Model):
     """
     subcategories = models.ForeignKey(SubCategories, on_delete=models.SET_NULL, blank=True, null=True,
                                       verbose_name="Pastgi Kategoriyalar")
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True,
+                             verbose_name="Foydalanuvchi")
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Nomi", db_index=True)
     subject = models.TextField(verbose_name="Izoh")
     files = models.ManyToManyField("Files", verbose_name="Loyiha fayillari")
@@ -62,6 +64,8 @@ class Files(models.Model):
     Loyiha Fayllari uchun model
     """
     file_code = models.CharField(max_length=25, verbose_name="Fayil Kodi")
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True,
+                             verbose_name="Foydalanuvchi")
     file = models.FileField(upload_to="file", verbose_name="Fayl")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Kiritilgan vaqti")
 

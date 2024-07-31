@@ -5,7 +5,7 @@ from .views import (CategoriesCreateAPIView, SubCategoriesCreateAPIView, Childre
 app_name = "db_main"
 
 urlpatterns = [
-    path('categories-create/', CreateChildrenCreateAPIView.as_view(), name="categories-create"),
+    path('categories-create/', CategoriesCreateAPIView.as_view(), name="categories-create"),
     path('subcategories-create/', SubCategoriesCreateAPIView.as_view(), name='subcategories-create'),
     path('children/', Children.as_view(), name='children'),
     path('children-post/', CreateChildrenCreateAPIView.as_view(), name='children-post')
