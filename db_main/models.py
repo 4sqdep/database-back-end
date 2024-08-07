@@ -23,15 +23,15 @@ class SubCategories(models.Model):
     """
     Pastgi Kategorialar uchun model
     """
-    categories = models.ForeignKey(Categories, on_delete=models.SET_NULL, blank=True, null=True,
-                                   verbose_name="Kategoriyalar")
+    categories = models.ForeignKey(Categories, on_delete=models.SET_NULL,  related_name='subcategories',
+                                   null=True, blank=True, verbose_name="Kategoriyalar")
     name = models.CharField(max_length=500, blank=True, null=True, verbose_name="Pastgi Kategoriya", db_index=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True,
                                verbose_name="Pastgi Kategoriyalar bolalari")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Kiritilgan vaqti")
 
     def __str__(self):
-        return f"{self.categories} -- {self.parent} -- {self.name}"
+        return f"{self.categories} -- {self.name}"
 
     class Meta:
         verbose_name = "Pastgi Kategoriya"
@@ -48,7 +48,6 @@ class Projects(models.Model):
                              verbose_name="Foydalanuvchi")
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Nomi", db_index=True)
     subject = models.TextField(verbose_name="Izoh")
-    files = models.ManyToManyField("Files", verbose_name="Loyiha fayillari")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Kiritilgan vaqti")
 
     def __str__(self):
@@ -63,9 +62,9 @@ class Files(models.Model):
     """
     Loyiha Fayllari uchun model
     """
+    project = models.ForeignKey(Projects, on_delete=models.SET_NULL, null=True, blank=True,
+                                verbose_name="Kategoriya")
     file_code = models.CharField(max_length=25, verbose_name="Fayil Kodi")
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True,
-                             verbose_name="Foydalanuvchi")
     file = models.FileField(upload_to="file", verbose_name="Fayl")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Kiritilgan vaqti")
 

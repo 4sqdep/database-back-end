@@ -30,7 +30,7 @@ admin.site.register(Projects, ProjectsAdmin)
 
 
 class FilesAdmin(admin.ModelAdmin):
-    list_display = ['id', 'file_code', 'user', 'created_at']
+    list_display = ['id', 'project', 'file_code',  'created_at']
     list_display_links = ['id', 'file_code']
     search_fields = ['id', 'file_code']
 
