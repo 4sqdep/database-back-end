@@ -74,3 +74,29 @@ class Files(models.Model):
     class Meta:
         verbose_name = "Fayil"
         verbose_name_plural = "Loyiha Fayillari"
+
+
+
+class APIRequestCount(models.Model):
+    endpoint = models.CharField(max_length=255, unique=True, verbose_name="So'rov")
+    count = models.CharField(default=0)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Foydalanuvchi')
+    ip_address = models.GenericIPAddressField(null=True, blank=True, verbose_name="IP Address")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="So'rov vaqti")
+    def __str__(self):
+        return f"{self.endpoint} -- {self.count}"
+
+    class Meta:
+        verbose_name = "So'rovlar soni"
+
+
+class APIRequestCountLog(models.Model):
+    api_request = models.ForeignKey(APIRequestCount, related_name='logs', on_delete=models.CASCADE,
+                                    verbose_name="Oxirgi so'rov")
+    timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Oxirgi so'rov vaqti")
+
+    def __str__(self):
+        return f"{self.api_request} -- {self.timestamp}"
+
+    class Meta:
+        verbose_name = "So'rov vaqtlari"

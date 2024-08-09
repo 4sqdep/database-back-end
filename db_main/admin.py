@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Categories, SubCategories, Projects, Files
+from .models import Categories, SubCategories, Projects, Files, APIRequestCount, APIRequestCountLog
 
 
 class CategoriesAdmin(admin.ModelAdmin):
@@ -36,3 +36,12 @@ class FilesAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Files, FilesAdmin)
+
+class APIRequestCountAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'ip_address', 'endpoint', 'count', 'created_at']
+    list_display_links = ['id', 'endpoint', 'count']
+
+
+admin.site.register(APIRequestCount, APIRequestCountAdmin)
+
+admin.site.register(APIRequestCountLog)
