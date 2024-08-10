@@ -8,7 +8,13 @@ class  CategoriesSerializers(serializers.ModelSerializer):
     """
     class Meta:
         model = Categories
-        fields = ('id', 'name', 'user')
+        fields = ('id', 'name', 'user', 'created_at')
+
+
+class GetCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categories
+        fields = ['id', 'name', 'created_at']
 
 
 class SubCategoriesSerializers(serializers.ModelSerializer):
@@ -20,52 +26,6 @@ class SubCategoriesSerializers(serializers.ModelSerializer):
         model = SubCategories
         fields = ('id', 'categories', 'name')
 
-
-class GetSubCategoriesSerializer(serializers.ModelSerializer):
-    """
-    Kategoriyaga tegishli SubCategoruyalarni olish uchun
-    """
-    class Meta:
-        model = SubCategories
-        fields = ['id', 'name', 'parent']
-
-
-class GetChildSubCategorySerializer(serializers.ModelSerializer):
-    """
-    Ota subcategoriyaga tegishli bola kategoriyalarni olish
-    """
-    children = serializers.SerializerMethodField()
-    class Meta:
-        model = SubCategories
-        fields = ['id', 'name', 'children']
-    def get_children(self, obj):
-        children = SubCategories.objects.filter(parent=obj)
-        print("WWWWWWWWWWWW", children)
-        return GetChildSubCategorySerializer(children, many=True).data
-
-
-class GetCategorySerializer(serializers.ModelSerializer):
-    subcategories = GetSubCategoriesSerializer(many=True, read_only=True)
-    class Meta:
-        model = Categories
-        fields = ('id', 'subcategories', 'name')
-
-
-class SubCategoriesChildrenSerializers(serializers.ModelSerializer):
-    """
-    Bolalarini olish uchun serializers
-    """
-    children = SubCategoriesSerializers(many=True)
-
-    class Meta:
-        model = SubCategories
-        fields = ['id', 'name', 'categories', 'parent', 'children']
-
-    def get_children(self, obj):
-        children = obj.children.all()
-        for chid in children:
-            print(chid.name)
-        return SubCategoriesChildrenSerializers(children, many=True).data
 
 
 

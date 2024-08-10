@@ -7,9 +7,27 @@ from django.db.models import Q
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Categories, SubCategories
-from .serializers import (CategoriesSerializers, SubCategoriesSerializers, SubCategoriesChildrenSerializers,
-                          SubCategoriesChildrenSerializer, ProjectsSerializer, FilesSerializer, GetSubCategoriesSerializer,
-                          GetCategorySerializer, GetChildSubCategorySerializer)
+from .serializers import (CategoriesSerializers, SubCategoriesSerializers, SubCategoriesChildrenSerializer,
+                          ProjectsSerializer, GetCategorySerializer)
+
+
+class UserGetCategoriesAPIView(APIView):
+    """
+    Foydalanuvchi o'zi yaratgan loyiha kategoriyalarini olish uchun
+    fields = (id, name, user, created_at)
+    """
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        try:
+            user = request.user
+            category = Categories.objects.filter(user=user)
+            serializer = GetCategorySerializer(category, many=True)
+            return Response({'message': "Foydalanuvchining kategoriyalari", 'data': serializer.data},
+                            status=status.HTTP_200_OK)
+        except Categories.DoesNotExist:
+            return Response({'message': "Foydalanuvchida kategoriya mavjut emas", 'data': serializer.errors},
+                            status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class CategoriesCreateAPIView(CreateAPIView):
@@ -27,74 +45,6 @@ class CategoriesCreateAPIView(CreateAPIView):
             raise PermissionDenied(detail="Faqat Loyihachilar toifalarni yaratishi mumkin..")
 
 
-class SubCategoriesCreateAPIView(CreateAPIView):
-    """
-    Foydalanuvchi Kategoriyalarni tanlagan holda SubCategoriya yaratish uchun CreateAPIView
-    """
-    permission_classes = [IsAuthenticated]
-    queryset = SubCategories.objects.all()
-    serializer_class = SubCategoriesSerializers
-
-    def perform_create(self, serializer):
-        if self.request.user.is_designer == True:
-            serializer.save()
-        else:
-            raise PermissionDenied(detail="Faqat Loyihachilar toifalarni yaratishi mumkin..")
-
-
-class GetSubCategoriesAPIView(APIView):
-    """
-    Kategoriyaga tekishli SubCategoriyalarni olish uchun APIView
-    """
-
-    def get(self, request, pk, format=None):
-        try:
-            subcategory = SubCategories.objects.filter(categories_id=pk, parent=None)
-            print(subcategory)
-            serializers = GetSubCategoriesSerializer(subcategory, many=True)
-            return Response({"message": "Barcha SubCategoriyalar", 'data': serializers.data},
-                            status=status.HTTP_200_OK)
-        except Categories.DoesNotExist:
-            return Response({'message': "Malumot topilmadi", 'data': serializers.errors},
-                            status=status.HTTP_404_NOT_FOUND)
-
-
-class GetChildSubCategoriesAPIView(APIView):
-    """
-    Ota subcategoriyaga tegishli bola kategoriyalarni olish uchun API
-    """
-    def get(self, request, id, format=None):
-        try:
-            children = SubCategories.objects.filter(parent_id=id)
-            serializer = GetChildSubCategorySerializer(children, many=True)
-            return Response({'message': "Bola kategoriyalar", 'data': serializer.data},
-                            status=status.HTTP_200_OK)
-        except SubCategories.DoesNotExist:
-            return Response({'message': "Xato....", 'data': serializer.errors},
-                            status=status.HTTP_400_BAD_REQUEST)
-
-
-
-class Children(APIView):
-    """
-    SubCategoriya bolalarini ko'rish uchun APIView
-    """
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request, *args, **kwargs):
-        subcategories = SubCategories.objects.filter(parent__isnull=True)
-        for subcategoriy in subcategories:
-            print(subcategoriy.name)
-        serializers = SubCategoriesChildrenSerializers(subcategories, many=True)
-        return Response(serializers.data)
-
-
-class CreateChildrenCreateAPIView(CreateAPIView):
-    """Ota kategoriyaga bola kategoriyalarni post qilish"""
-    permission_classes = [IsAuthenticated]
-    queryset = SubCategories.objects.all()
-    serializer_class = SubCategoriesChildrenSerializer
-
 
 class ProjectCreate(APIView):
     permission_classes = [IsAuthenticated],
@@ -108,3 +58,29 @@ class ProjectCreate(APIView):
                             status=status.HTTP_201_CREATED)
         return Response({"message": "Xatolik yuz berdi....", 'error': serializer.errors},
                         status=status.HTTP_400_BAD_REQUEST)
+
+
+
+# class SubCategoriesCreateAPIView(CreateAPIView):
+#     """
+#     Foydalanuvchi Kategoriyalarni tanlagan holda SubCategoriya yaratish uchun CreateAPIView
+#     """
+#     permission_classes = [IsAuthenticated]
+#     queryset = SubCategories.objects.all()
+#     serializer_class = SubCategoriesSerializers
+#
+#     def perform_create(self, serializer):
+#         if self.request.user.is_designer == True:
+#             serializer.save()
+#         else:
+#             raise PermissionDenied(detail="Faqat Loyihachilar toifalarni yaratishi mumkin..")
+
+
+
+
+
+# class CreateChildrenCreateAPIView(CreateAPIView):
+#     """Ota kategoriyaga bola kategoriyalarni post qilish"""
+#     permission_classes = [IsAuthenticated]
+#     queryset = SubCategories.objects.all()
+#     serializer_class = SubCategoriesChildrenSerializer
