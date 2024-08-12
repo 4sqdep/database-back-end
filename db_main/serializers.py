@@ -66,3 +66,4 @@ class ProjectsSerializer(serializers.ModelSerializer):
         project = Projects.objects.create(**validated_data)
         for file_data in files_data:
             Files.objects.create(project=project, **file_data)
+        return project

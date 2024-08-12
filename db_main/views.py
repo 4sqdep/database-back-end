@@ -46,18 +46,38 @@ class CategoriesCreateAPIView(CreateAPIView):
 
 
 
-class ProjectCreate(APIView):
-    permission_classes = [IsAuthenticated],
+class PostProjectCreate(APIView):
+    permission_classes = [IsAuthenticated]
     parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request, *args, **kwargs):
-        serializer = ProjectsSerializer(data=request.data)
+#         Fayllarni alohida olish
+        files = request.FILES.getlist('file.file')
+        user = request.user
+        print('++++++++++++++++++++++++++++++++++', files)
+        if not files:
+            return Response({'error': 'No files were uploaded.'}, status=status.HTTP_400_BAD_REQUEST)
+        files_data = []
+        for file in files:
+            file_file_code = request.data.get('file.file_code')
+            file_file = request.data.get('file.file')
+            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", file_file_code, file_file)
+            if not file_file_code and file_file:
+                return Response({'message': f"{file.file_code} {file.file} malumotlari topilmadi"},
+                                status=status.HTTP_400_BAD_REQUEST)
+            files_data.append({'file': file_file, 'file_code': file_file_code})
+        project_data = {
+            'subcategories': request.data.get('subcategories'),
+            'name': request.data.get('name'),
+            'subject': request.data.get('subject'),
+            'files': files_data
+        }
+        print("======================", project_data)
+        serializer = ProjectsSerializer(data=project_data)
         if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response({'message': "Fayllar yuklandi", 'data': serializer.data},
-                            status=status.HTTP_201_CREATED)
-        return Response({"message": "Xatolik yuz berdi....", 'error': serializer.errors},
-                        status=status.HTTP_400_BAD_REQUEST)
+            serializer.save(user=user)
+            return Response({'message': "Malumot qo'shildi", 'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response({'xato': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 
