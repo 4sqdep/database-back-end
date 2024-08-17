@@ -13,6 +13,6 @@ urlpatterns = [
 #     DIRECTOR UCHUN
     path('category-all/', GetCategoriesAPIView.as_view(), name='category-all'),
     path('get-subcategories/<int:pk>/', GetSubCategoriesAPIView.as_view(), name='get-subcategories'),
-    path('get-children/<int:id>/', GetChildSubCategoriesAPIView.as_view(), name='get-children'),
+    # path('get-children/<int:id>/', GetChildSubCategoriesAPIView.as_view(), name='get-children'),
     path('post-project/', PostProjectCreate.as_view(), name='post-project'),
 ]

@@ -20,10 +20,12 @@ class GetSubCategoriesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SubCategories
-        fields = ['id', 'name', 'categories', 'children']
+        fields = ['id', 'name', 'children']
     def get_children(self, obj):
-        children = SubCategories.objects.filter(parent=obj)
-        return GetSubCategoriesSerializer(children, many=True).data
+        if obj.parent is None:
+            children = SubCategories.objects.filter(parent=obj)
+            return GetSubCategoriesSerializer(children, many=True, context=self.context).data
+        return []
 
 
 class GetChildSubCategorySerializer(serializers.ModelSerializer):
