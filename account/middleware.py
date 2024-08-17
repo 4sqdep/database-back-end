@@ -62,7 +62,7 @@ class APICountMiddleware(MiddlewareMixin):
             APIRequestCountLog.objects.create(api_request=api_request)
         elif request.path.startswith('/api/main/post-project/'):
             # IP manzilini olish
-            ip_address = request.META.get('REMOTE_ADDR')
+            ip_address = request.META.get('REMOTE_ADDR')  
             # Foydalanuvchini olish
             user = None
             if request.user.is_authenticated:

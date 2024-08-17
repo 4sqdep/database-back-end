@@ -36,7 +36,7 @@ class GetSubCategoriesAPIView(APIView):
 
     def get(self, request, pk, format=None):
         try:
-            subcategory = SubCategories.objects.filter(categories_id=pk, parent=None)
+            subcategory = SubCategories.objects.filter(categories_id=pk)
             print(subcategory)
             serializers = GetSubCategoriesSerializer(subcategory, many=True)
             return Response({"message": "Barcha SubCategoriyalar", 'data': serializers.data},

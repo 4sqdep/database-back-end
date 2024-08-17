@@ -51,7 +51,7 @@ class PostProjectCreate(APIView):
     parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request, *args, **kwargs):
-#         Fayllarni alohida olish
+        #Fayllarni alohida olish
         files = request.FILES.getlist('file.file')
         user = request.user
         print('++++++++++++++++++++++++++++++++++', files)

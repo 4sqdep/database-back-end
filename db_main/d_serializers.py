@@ -16,9 +16,14 @@ class GetSubCategoriesSerializer(serializers.ModelSerializer):
     """
     Kategoriyaga tegishli SubCategoruyalarni olish uchun
     """
+    children = serializers.SerializerMethodField()
+
     class Meta:
         model = SubCategories
-        fields = ['id', 'name', 'parent']
+        fields = ['id', 'name', 'categories', 'children']
+    def get_children(self, obj):
+        children = SubCategories.objects.filter(parent=obj)
+        return GetSubCategoriesSerializer(children, many=True).data
 
 
 class GetChildSubCategorySerializer(serializers.ModelSerializer):
