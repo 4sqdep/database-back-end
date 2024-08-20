@@ -67,3 +67,23 @@ class ProjectsSerializer(serializers.ModelSerializer):
         for file_data in files_data:
             Files.objects.create(project=project, **file_data)
         return project
+
+
+class FileSerializer(serializers.ModelSerializer):
+    """
+    Fayillarni olish uchun serializer
+    """
+    class Meta:
+        model = Files
+        fields = ['id', 'file_code', 'file', 'created_at']
+
+
+class GetProjectSerializer(serializers.ModelSerializer):
+    """
+    Project va unga tegishli fayllarni olish uchun serializer
+    """
+
+    files = FilesSerializer(many=True, read_only=True, source='files_set')
+    class Meta:
+        model = Projects
+        fields = ['id', 'name', 'subject', 'files', 'created_at']

@@ -6,9 +6,9 @@ from rest_framework.exceptions import PermissionDenied
 from django.db.models import Q
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
-from .models import Categories, SubCategories
+from .models import Categories, SubCategories, Projects
 from .serializers import (CategoriesSerializers, SubCategoriesSerializers, SubCategoriesChildrenSerializer,
-                          ProjectsSerializer, GetCategorySerializer)
+                          ProjectsSerializer, GetCategorySerializer, GetProjectSerializer)
 
 
 class UserGetCategoriesAPIView(APIView):
@@ -78,6 +78,26 @@ class PostProjectCreate(APIView):
             serializer.save(user=user)
             return Response({'message': "Malumot qo'shildi", 'data': serializer.data}, status=status.HTTP_200_OK)
         return Response({'xato': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetProjectAPIView(APIView):
+    """
+    Loyiha va unga tegishli fayillarni olish uchun
+    fiels = ['id', 'name', 'subject', 'files', 'created_at'] malumotlar keladigan fildlar
+    """
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
+
+    def get(self, request, pk):
+        try:
+            subcategory = SubCategories.objects.get(id=pk)
+            projects = Projects.objects.filter(subcategories=subcategory).prefetch_related('files_set')
+            serializer = GetProjectSerializer(projects, many=True)
+            return Response({"message": "Malumotlar", "data": serializer.data},
+                            status=status.HTTP_200_OK)
+        except SubCategories.DoesNotExist:
+            return Response({"message": "Malumot topilmadi", "error": serializer.errors},
+                            status=status.HTTP_400_BAD_REQUEST)
 
 
 
