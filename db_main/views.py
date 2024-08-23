@@ -9,6 +9,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Categories, SubCategories, Projects
 from .serializers import (CategoriesSerializers, SubCategoriesSerializers, SubCategoriesChildrenSerializer,
                           ProjectsSerializer, GetCategorySerializer, GetProjectSerializer)
+from .permission import IsNotStaffUserPermission
 
 
 class UserGetCategoriesAPIView(APIView):
@@ -47,7 +48,7 @@ class CategoriesCreateAPIView(CreateAPIView):
 
 
 class PostProjectCreate(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsNotStaffUserPermission]
     parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request, *args, **kwargs):

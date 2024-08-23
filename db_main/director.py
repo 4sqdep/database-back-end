@@ -6,8 +6,9 @@ from rest_framework.exceptions import PermissionDenied
 from django.db.models import Q
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
-from .models import Categories, SubCategories
-from .d_serializers import (GetCategorySerializer, GetSubCategoriesSerializer, GetChildSubCategorySerializer)
+from .models import Categories, SubCategories, Projects
+from .d_serializers import (GetCategorySerializer, GetSubCategoriesSerializer, GetChildSubCategorySerializer,
+                            SearchProjectSerializer)
 
 
 class GetCategoriesAPIView(APIView):
@@ -58,4 +59,24 @@ class GetChildSubCategoriesAPIView(APIView):
                             status=status.HTTP_200_OK)
         except SubCategories.DoesNotExist:
             return Response({'message': "Xato....", 'data': serializer.errors},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class SearchProjectAPIView(APIView):
+    """
+    Loyihalarni search qilish categoriya va subcategoriya tartiblari bilan
+    fields = ['id', 'subcategory id va name' 'user id va name', 'name', 'subject', 'created_at', 'files']
+    """
+
+    def get(self, request):
+        try:
+            name = request.query_params.get('name')
+            print("===============", name)
+            project = Projects.objects.filter(Q(name__icontains=name) | Q(subject__icontains=name))
+            print("############################", project)
+            serializer = SearchProjectSerializer(project, many=True)
+            return Response({'message': "Siz izlagan malumot", 'data': serializer.data}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'message': "Siz izlagan malumot topilmadi", 'data': str(e)},
                             status=status.HTTP_400_BAD_REQUEST)
