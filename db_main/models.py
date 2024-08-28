@@ -79,7 +79,7 @@ class Files(models.Model):
 
 class APIRequestCount(models.Model):
     endpoint = models.CharField(max_length=255, unique=True, verbose_name="So'rov")
-    count = models.CharField(default=0)
+    count = models.IntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Foydalanuvchi')
     ip_address = models.GenericIPAddressField(null=True, blank=True, verbose_name="IP Address")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="So'rov vaqti")
