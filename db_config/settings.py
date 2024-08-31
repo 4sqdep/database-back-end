@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-5u8m%(^r4ktj42pm8uf!fm!4wbk9@bvpn-5x+nvijq_oq@2qrr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['gidro.up.railway.app', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -83,7 +83,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'db_config.wsgi.application'
 
-DATABASE_URL = "postgresql://postgres:xdLJzKIBGwnvYfyntKkrkopgqATCQUUw@meticulous-empathy.railway.internal:5432/railway"
+DATABASE_URL = "postgresql://postgres:YpjfStXqESCAbdildDvMmsqXoHbDuZjU@meticulous-empathy.railway.internal:5432/railway"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
