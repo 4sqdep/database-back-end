@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-5u8m%(^r4ktj42pm8uf!fm!4wbk9@bvpn-5x+nvijq_oq@2qrr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['gidro.up.railway.app', '127.0.0.1:8000']
 
 
 # Application definition
@@ -400,7 +400,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
-    "https://database-back-end.onrender.com"
+    "https://gidro.up.railway.app/"
 ]
 ###################################################################
 # CORS
@@ -408,9 +408,9 @@ CSRF_TRUSTED_ORIGINS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = ["*"]
+CORS_ALLOW_HEADERS = ["https://gidro.up.railway.app/"]
 
-HOST = "https://database-back-end.onrender.com"
+HOST = "https://gidro.up.railway.app/"
 
 
 

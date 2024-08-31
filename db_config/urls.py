@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from .yasg import urlpatterns as doc_urls
 
 urlpatterns = [
-    path('hccsadmin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('api/', include([
         path('', include("account.urls")),
         path('main/', include("db_main.urls"))
