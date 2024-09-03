@@ -411,7 +411,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
-    "https://gidro.up.railway.app/"
+    "database-back-end-production.up.railway.app/"
 ]
 ###################################################################
 # CORS
@@ -419,9 +419,9 @@ CSRF_TRUSTED_ORIGINS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = ["https://gidro.up.railway.app/"]
+CORS_ALLOW_HEADERS = ["database-back-end-production.up.railway.app/"]
 
-HOST = "https://gidro.up.railway.app/"
+HOST = "database-back-end-production.up.railway.app/"
 
 
 
