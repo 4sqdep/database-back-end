@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import User, Role
+from django.contrib.auth.models import Permission
 
 
 class RolesAdmin(admin.ModelAdmin):
@@ -25,3 +26,5 @@ class UserAdmin(admin.ModelAdmin):
 
 
 admin.site.register(User, UserAdmin)
+
+admin.site.register(Permission)

@@ -40,11 +40,13 @@ class CategoriesCreateAPIView(CreateAPIView):
     serializer_class = CategoriesSerializers
 
     def perform_create(self, serializer):
+        if self.request.user.is_staff:
+            # Staff foydalanuvchilarga POST qilishni taqiqlaydi
+            raise PermissionDenied(detail="Siz POST so'rovi yubora olmaysiz, chunki siz staff foydalanuvchisiz.")
         if self.request.user.is_designer == True:
             serializer.save(user=self.request.user)
         else:
             raise PermissionDenied(detail="Faqat Loyihachilar toifalarni yaratishi mumkin..")
-
 
 
 class PostProjectCreate(APIView):
