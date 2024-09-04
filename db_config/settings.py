@@ -403,8 +403,8 @@ SIMPLE_JWT = {
 ###################################################################
 # CORS
 ###################################################################
+CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ["https://database-back-end-production.up.railway.app"]
 
