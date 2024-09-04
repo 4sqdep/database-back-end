@@ -60,7 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'account.middleware.APICountMiddleware'
+    # 'account.middleware.APICountMiddleware'
 ]
 
 ROOT_URLCONF = 'db_config.urls'
