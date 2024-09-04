@@ -89,20 +89,7 @@ DATABASE_URL = "postgresql://postgres:igreayLSFOdBtQxfFRylTkxOFoigRJzH@autorack.
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': dj_database_url.parse(env('DATABASE_URL'))
-# }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'railway',
-#         'USER': 'postgres',
-#         'PASSWORD': 'igreayLSFOdBtQxfFRylTkxOFoigRJzH',
-#         'HOST': 'meticulous-empathy-twq0.railway.internal',
-#         'PORT': '5432',  # or the correct port number
-#     }
-# }
 
 DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1000)
@@ -406,22 +393,22 @@ SIMPLE_JWT = {
 }
 
 
-USE_X_FORWARDED_HOST = True
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-
-CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = [
-    "https://database-back-end-production.up.railway.app/"
-]
+# USE_X_FORWARDED_HOST = True
+# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+#
+# CSRF_COOKIE_SECURE = True
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://database-back-end-production.up.railway.app/"
+# ]
 ###################################################################
 # CORS
 ###################################################################
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = ["https://database-back-end-production.up.railway.app/"]
+CORS_ALLOW_HEADERS = ["https://database-back-end-production.up.railway.app"]
 
-HOST = "https://database-back-end-production.up.railway.app/"
+# HOST = "https://database-back-end-production.up.railway.app"
 
 
 
