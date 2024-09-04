@@ -28,8 +28,9 @@ SECRET_KEY = "django-insecure-5u8m%(^r4ktj42pm8uf!fm!4wbk9@bvpn-5x+nvijq_oq@2qrr
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = ['https://database-back-end-production.up.railway.app', 'database-back-end-production.up.railway.app']
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -393,42 +394,26 @@ SIMPLE_JWT = {
 }
 
 
-# USE_X_FORWARDED_HOST = True
-# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-#
-# CSRF_COOKIE_SECURE = True
-# CSRF_TRUSTED_ORIGINS = [
-#     "https://database-back-end-production.up.railway.app/"
-# ]
+
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = [
+    "https://gidroqurilish.vercel.app",
+    "https://database-back-end-production.up.railway.app"
+]
 ###################################################################
 # CORS
 ###################################################################
+
 CORS_ORIGIN_ALLOW_ALL = True
-
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = ["https://database-back-end-production.up.railway.app"]
+CORS_ALLOW_HEADERS = ["*"]
 
-# HOST = "https://database-back-end-production.up.railway.app"
-
-
+HOST = "https://database-back-end-production.up.railway.app"
 
 
-# LOCAL UCHUN
-#
-# USE_X_FORWARDED_HOST = True
-# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-#
-#
-# CSRF_COOKIE_SECURE = True
-# CSRF_TRUSTED_ORIGINS = [
-#     "http://localhost:8000"
-# ]
-# ###################################################################
-# # CORS
-# ###################################################################
-#
-# CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOW_HEADERS = ["*"]
-#
-# HOST = "http://localhost:8000"
+
+
+
