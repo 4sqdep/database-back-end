@@ -397,15 +397,15 @@ SIMPLE_JWT = {
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-CORS_ALLOWED_ORIGINS = [
-    "https://gidroqurilish.vercel.app",  # Frontend domeningiz
-    "https://database-back-end-production.up.railway.app", # Backend domen
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "https://gidroqurilish.vercel.app",  # Frontend domeningiz
+#     "https://database-back-end-production.up.railway.app", # Backend domen
+# ]
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = [
-    'https://gidroqurilish.vercel.app',  # Frontend domeningiz
-    'https://database-back-end-production.up.railway.app', # Backend domen
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://gidroqurilish.vercel.app',  # Frontend domeningiz
+#     'https://database-back-end-production.up.railway.app', # Backend domen
+# ]
 
 ###################################################################
 # CORS
@@ -413,40 +413,40 @@ CSRF_TRUSTED_ORIGINS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = [
-    'accept',                   # Yangi so'rov turlarini qabul qiladi
-    'accept-encoding',          # So'rovni qabul qilishda foydalaniladigan kodlash turlari
-    'authorization',            # Avtorizatsiya uchun ma'lumotlar (masalan, Bearer token)
-    'content-type',             # So'rovning kontent turi (masalan, application/json)
-    'origin',                   # Kelgan domenning manbasi
-    'user-agent',               # Brauzer yoki mijozi haqida ma'lumot
-    'x-csrftoken',              # CSRF token
-    'x-requested-with',         # AJAX so'rovlar uchun ishlatiladi
-    'access-control-allow-headers',   # So'rovda foydalaniladigan sarlavhalar ro'yxati
-    'access-control-allow-methods',   # So'rovda foydalaniladigan metodlar ro'yxati
-    'access-control-allow-origin',    # So'rovni qabul qilishga ruxsat etilgan manbalar
-    'access-control-max-age',         # So'rov keshining yaroqlilik muddati
-    'access-control-expose-headers',  # Javobda ko'rinadigan sarlavhalar ro'yxati
-    'access-control-request-method',  # So'rovda foydalaniladigan metodlar haqida ma'lumot
-    'access-control-request-headers', # So'rovda foydalaniladigan sarlavhalar haqida ma'lumot
-    'connection',              # So'rovning tarmoq aloqasi haqida ma'lumot
-    'host',                    # So'rov qilingan serverning manzili
-    'referer',                 # Qayta yo'naltirilgan so'rov manbasi
-    'pragma',                  # Kesh siyosatlari uchun ishlatiladi
-    'cache-control',           # Keshni boshqarish sarlavhasi
-    'content-length',          # So'rovning kontent uzunligi
-    'transfer-encoding',       # So'rovda transfer kodlash turi
-    'via',                     # So'rovda ishlatilgan oraliq serverlar haqida ma'lumot
-    'warning',                 # So'rov yoki javobda ogohlantirish
-]
+# CORS_ALLOW_HEADERS = [
+#     'accept',                   # Yangi so'rov turlarini qabul qiladi
+#     'accept-encoding',          # So'rovni qabul qilishda foydalaniladigan kodlash turlari
+#     'authorization',            # Avtorizatsiya uchun ma'lumotlar (masalan, Bearer token)
+#     'content-type',             # So'rovning kontent turi (masalan, application/json)
+#     'origin',                   # Kelgan domenning manbasi
+#     'user-agent',               # Brauzer yoki mijozi haqida ma'lumot
+#     'x-csrftoken',              # CSRF token
+#     'x-requested-with',         # AJAX so'rovlar uchun ishlatiladi
+#     'access-control-allow-headers',   # So'rovda foydalaniladigan sarlavhalar ro'yxati
+#     'access-control-allow-methods',   # So'rovda foydalaniladigan metodlar ro'yxati
+#     'access-control-allow-origin',    # So'rovni qabul qilishga ruxsat etilgan manbalar
+#     'access-control-max-age',         # So'rov keshining yaroqlilik muddati
+#     'access-control-expose-headers',  # Javobda ko'rinadigan sarlavhalar ro'yxati
+#     'access-control-request-method',  # So'rovda foydalaniladigan metodlar haqida ma'lumot
+#     'access-control-request-headers', # So'rovda foydalaniladigan sarlavhalar haqida ma'lumot
+#     'connection',              # So'rovning tarmoq aloqasi haqida ma'lumot
+#     'host',                    # So'rov qilingan serverning manzili
+#     'referer',                 # Qayta yo'naltirilgan so'rov manbasi
+#     'pragma',                  # Kesh siyosatlari uchun ishlatiladi
+#     'cache-control',           # Keshni boshqarish sarlavhasi
+#     'content-length',          # So'rovning kontent uzunligi
+#     'transfer-encoding',       # So'rovda transfer kodlash turi
+#     'via',                     # So'rovda ishlatilgan oraliq serverlar haqida ma'lumot
+#     'warning',                 # So'rov yoki javobda ogohlantirish
+# ]
 
 
 
 
-HOST = [
-    'https://gidroqurilish.vercel.app',  # Frontend domeningiz
-    'https://database-back-end-production.up.railway.app', # Backend domen
-]
+# HOST = [
+#     'https://gidroqurilish.vercel.app',  # Frontend domeningiz
+#     'https://database-back-end-production.up.railway.app', # Backend domen
+# ]
 
 
 
