@@ -397,7 +397,7 @@ SIMPLE_JWT = {
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-CORS_ALLOWED_ORIGINS = ['https://gidroqurilish.vercel.app']
+CORS_ALLOWED_ORIGINS = ['*']
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = ["*"]
 ###################################################################
