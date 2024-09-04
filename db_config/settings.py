@@ -397,12 +397,9 @@ SIMPLE_JWT = {
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-CORS_ALLOWED_ORIGINS = ['*']
+CORS_ALLOWED_ORIGINS = ['https://gidroqurilish.vercel.app']
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = [
-    # "https://gidroqurilish.vercel.app",
-    "https://database-back-end-production.up.railway.app"
-]
+CSRF_TRUSTED_ORIGINS = ["*"]
 ###################################################################
 # CORS
 ###################################################################
