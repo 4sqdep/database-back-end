@@ -28,7 +28,7 @@ SECRET_KEY = "django-insecure-5u8m%(^r4ktj42pm8uf!fm!4wbk9@bvpn-5x+nvijq_oq@2qrr
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['https://database-back-end-production.up.railway.app', '*']
+ALLOWED_HOSTS = ['*']
 
 # ALLOWED_HOSTS = ['*']
 
@@ -397,7 +397,7 @@ SIMPLE_JWT = {
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-
+CORS_ALLOWED_ORIGINS = ['*']
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
     # "https://gidroqurilish.vercel.app",
@@ -411,7 +411,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ["*"]
 
-HOST = "https://database-back-end-production.up.railway.app"
+
+
+HOST = "*"
 
 
 
