@@ -26,8 +26,8 @@ class GetSubCategoriesSerializer(serializers.ModelSerializer):
         model = SubCategories
         fields = ['id', 'name', 'children']
     def get_children(self, obj):
-        if obj.parent is None:
-            children = SubCategories.objects.filter(parent=obj)
+        children = SubCategories.objects.filter(parent=obj)
+        if children.exists():
             return GetSubCategoriesSerializer(children, many=True, context=self.context).data
         return []
 
