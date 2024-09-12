@@ -394,6 +394,9 @@ SIMPLE_JWT = {
 }
 
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'content-type',
     'authorization',
