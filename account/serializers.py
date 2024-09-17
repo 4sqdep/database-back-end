@@ -22,3 +22,10 @@ class LoginSerializers(TokenObtainPairSerializer):
         data['is_director'] = self.user.is_director
         data['is_designer'] = self.user.is_designer
         return data
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    """Foydalanuvchi profilini to'ldirish"""
+    class Meta:
+        model = User
+        fields = ['id', 'first_name', 'last_name']
