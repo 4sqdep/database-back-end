@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import (CategoriesCreateAPIView, UserGetCategoriesAPIView, PostProjectCreate, GetProjectAPIView)
+from .views import (CategoriesCreateAPIView, UserGetCategoriesAPIView, PostProjectCreate, GetProjectAPIView,
+                    SearchCategoryAPIView)
 from .director import GetCategoriesAPIView, GetSubCategoriesAPIView, GetChildSubCategoriesAPIView, SearchProjectAPIView
 
 
@@ -16,5 +17,7 @@ urlpatterns = [
     # path('get-children/<int:id>/', GetChildSubCategoriesAPIView.as_view(), name='get-children'),
     path('post-project/', PostProjectCreate.as_view(), name='post-project'),
     path('get-project/<int:pk>/', GetProjectAPIView.as_view(), name='get-project'),
-    path('search-product/', SearchProjectAPIView.as_view(), name='search-product')
+    path('search-product/', SearchProjectAPIView.as_view(), name='search-product'),
+
+    path('category-search/', SearchCategoryAPIView.as_view(), name='category-search')
 ]

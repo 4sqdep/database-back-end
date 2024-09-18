@@ -87,3 +87,10 @@ class GetProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Projects
         fields = ['id', 'name', 'subject', 'files', 'created_at']
+
+
+class SearchCategorySerializer(serializers.ModelSerializer):
+    """Categoriya search qilish uchun"""
+    class Meta:
+        model = Categories
+        fields = ['id', 'name']

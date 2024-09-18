@@ -8,7 +8,7 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Categories, SubCategories, Projects
 from .serializers import (CategoriesSerializers, SubCategoriesSerializers, SubCategoriesChildrenSerializer,
-                          ProjectsSerializer, GetCategorySerializer, GetProjectSerializer)
+                          ProjectsSerializer, GetCategorySerializer, GetProjectSerializer, SearchCategorySerializer)
 from .permission import IsNotStaffUserPermission
 
 
@@ -102,6 +102,18 @@ class GetProjectAPIView(APIView):
             return Response({"message": "Malumot topilmadi", "error": serializer.errors},
                             status=status.HTTP_400_BAD_REQUEST)
 
+
+class SearchCategoryAPIView(APIView):
+    """Kategoriya izlash uchun """
+    def get(self, request):
+        try:
+            name = request.query_params.get('name')
+            category = Categories.objects.filter(Q(name__icontains=name))
+            serializer = SearchCategorySerializer(category, many=True)
+            return Response({'message': "Siz izlagan malumot", 'data': serializer.data}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'message': "Siz izlagan malumot topilmadi", 'data': str(e)},
+                            status=status.HTTP_400_BAD_REQUEST)
 
 
 # class SubCategoriesCreateAPIView(CreateAPIView):
