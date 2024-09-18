@@ -5,12 +5,13 @@ from account.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username']
+        fields = ['id', 'first_name', 'last_name']
 
 class GetCategorySerializer(serializers.ModelSerializer):
     """
     Barcha Kategoriyalarni olish uchun serializer
     """
+    user = UserSerializer(read_only=True)
     class Meta:
         model = Categories
         fields = ['id', 'user', 'name', 'created_at']

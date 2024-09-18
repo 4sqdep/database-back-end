@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Categories, SubCategories, Projects, Files
+from .d_serializers import UserSerializer
 
 
 class  CategoriesSerializers(serializers.ModelSerializer):
@@ -91,6 +92,7 @@ class GetProjectSerializer(serializers.ModelSerializer):
 
 class SearchCategorySerializer(serializers.ModelSerializer):
     """Categoriya search qilish uchun"""
+    user = UserSerializer(read_only=True)
     class Meta:
         model = Categories
-        fields = ['id', 'name']
+        fields = ['id', 'user', 'name']
