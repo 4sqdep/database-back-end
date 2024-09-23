@@ -95,4 +95,4 @@ class SearchCategorySerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     class Meta:
         model = Categories
-        fields = ['id', 'user', 'name']
+        fields = ['id', 'user', 'name', 'created_at']
