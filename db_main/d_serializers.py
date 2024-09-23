@@ -65,3 +65,10 @@ class SearchProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Projects
         fields = ['id', 'subcategories', 'user', 'name', 'subject', 'created_at', 'files']
+
+
+class SearchSubCategorySerializer(serializers.ModelSerializer):
+    """Kategoriyaga tegishli Subcategoriyalarni search qilish uchun serializer"""
+    class Meta:
+        model = SubCategories
+        fields = ['id', 'name']

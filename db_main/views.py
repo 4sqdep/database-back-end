@@ -10,6 +10,7 @@ from .models import Categories, SubCategories, Projects
 from .serializers import (CategoriesSerializers, SubCategoriesSerializers, SubCategoriesChildrenSerializer,
                           ProjectsSerializer, GetCategorySerializer, GetProjectSerializer, SearchCategorySerializer)
 from .permission import IsNotStaffUserPermission
+from .d_serializers import SearchSubCategorySerializer
 
 
 class UserGetCategoriesAPIView(APIView):
@@ -115,6 +116,20 @@ class SearchCategoryAPIView(APIView):
             return Response({'message': "Siz izlagan malumot topilmadi", 'data': str(e)},
                             status=status.HTTP_400_BAD_REQUEST)
 
+
+class SearchSubCategoryAPIView(APIView):
+    """
+    Kategoriyaga tegishli subcategry search qilish uchun APIView
+    """
+    def get(self, request, pk=None):
+        try:
+            name = request.query_params.get('name')
+            subcategory = SubCategories.objects.filter(Q(categories_id=pk) & Q(name__icontains=name))
+            serializer = SearchSubCategorySerializer(subcategory, many=True)
+            return Response({'message': "Siz izlagan malumot", 'data': serializer.data}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'message': "Siz izlagan malumot topilmadi", 'data': str(e)},
+                            status=status.HTTP_400_BAD_REQUEST)
 
 # class SubCategoriesCreateAPIView(CreateAPIView):
 #     """
