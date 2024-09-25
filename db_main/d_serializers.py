@@ -43,7 +43,6 @@ class GetChildSubCategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'children']
     def get_children(self, obj):
         children = SubCategories.objects.filter(parent=obj)
-        print("WWWWWWWWWWWW", children)
         return GetChildSubCategorySerializer(children, many=True).data
 
 

@@ -95,7 +95,7 @@ class GetProjectAPIView(APIView):
     def get(self, request, pk):
         try:
             subcategory = SubCategories.objects.get(id=pk)
-            projects = Projects.objects.filter(subcategories=subcategory).prefetch_related('files_set')
+            projects = Projects.objects.filter(subcategories=subcategory).prefetch_related('files_set').select_related('subcategories')
             serializer = GetProjectSerializer(projects, many=True)
             return Response({"message": "Malumotlar", "data": serializer.data},
                             status=status.HTTP_200_OK)
