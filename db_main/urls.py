@@ -17,7 +17,7 @@ urlpatterns = [
     # path('get-children/<int:id>/', GetChildSubCategoriesAPIView.as_view(), name='get-children'),
     path('post-project/', PostProjectCreate.as_view(), name='post-project'),
     path('get-project/<int:pk>/', GetProjectAPIView.as_view(), name='get-project'),
-    path('search-product/<int:pk>/', SearchProjectAPIView.as_view(), name='search-product'),
+    path('search-project/<int:pk>/', SearchProjectAPIView.as_view(), name='search-project'),
 
     path('category-search/', SearchCategoryAPIView.as_view(), name='category-search'),
 
