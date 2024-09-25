@@ -72,8 +72,11 @@ class SearchProjectAPIView(APIView):
     def get(self, request, pk=None):
         try:
             name = request.query_params.get('name')
-            project = Projects.objects.filter(Q(subcategories_id=pk) & Q(name__icontains=name) | Q(subject__icontains=name))
+            project = Projects.objects.filter(subcategories_id=pk).filter(Q(name__icontains=name) |
+                                                                          Q(subject__icontains=name))
+            print("PROJECT=======", project)
             serializer = SearchProjectSerializer(project, many=True)
+            print("SERIALIZER========", serializer)
             return Response({'message': "Siz izlagan malumot", 'data': serializer.data}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'message': "Siz izlagan malumot topilmadi", 'data': str(e)},
