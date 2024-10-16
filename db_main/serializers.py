@@ -96,3 +96,9 @@ class SearchCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Categories
         fields = ['id', 'user', 'name', 'created_at']
+
+
+class SubCategoriesCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubCategories
+        fields = ['id', 'categories', 'name']

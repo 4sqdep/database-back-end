@@ -7,7 +7,7 @@ from django.db.models import Q
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Categories, SubCategories, Projects
-from .serializers import (CategoriesSerializers, SubCategoriesSerializers, SubCategoriesChildrenSerializer,
+from .serializers import (CategoriesSerializers, SubCategoriesSerializers, SubCategoriesChildrenSerializer, SubCategoriesCreateSerializer,
                           ProjectsSerializer, GetCategorySerializer, GetProjectSerializer, SearchCategorySerializer)
 from .permission import IsNotStaffUserPermission
 from .d_serializers import SearchSubCategorySerializer
@@ -130,6 +130,33 @@ class SearchSubCategoryAPIView(APIView):
         except Exception as e:
             return Response({'message': "Siz izlagan malumot topilmadi", 'data': str(e)},
                             status=status.HTTP_400_BAD_REQUEST)
+
+
+class AddSubCategoryAPIView(APIView):
+    """
+    Kategoriya ichida papka yaratish uchun view
+    """
+    permission_classes = [IsAuthenticated]
+    def post(self, request, pk=None):
+        try:
+            categories = Categories.objects.get(id=pk)
+            print("eeeeeee====", categories)
+        except Categories.DoesNotExist:
+            return Response({"message": "Bu id da Kategoriya topilmadi...."}, status=status.HTTP_404_NOT_FOUND)
+        subcategories_data = request.data.get('subcategories')
+        if not subcategories_data:
+            return Response({"message": "Subkategoriya yaratish talab qilinadi..."}, status=status.HTTP_400_BAD_REQUEST)
+        for sub in subcategories_data:
+            sub['categories'] = categories.id
+            print("QQQQQQQQQQQ========", sub)
+            serializer = SubCategoriesCreateSerializer(data=sub)
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"message": "SubCategoriya muvaffaqiyatli qo‘shildi...", 'data': serializer.data},
+                        status=status.HTTP_201_CREATED)
+
 
 # class SubCategoriesCreateAPIView(CreateAPIView):
 #     """
