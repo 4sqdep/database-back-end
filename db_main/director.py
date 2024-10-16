@@ -1,11 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.exceptions import PermissionDenied
 from django.db.models import Q
 from rest_framework import status
-from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Categories, SubCategories, Projects
 from .d_serializers import (GetCategorySerializer, GetSubCategoriesSerializer, GetChildSubCategorySerializer,
                             SearchProjectSerializer)
@@ -74,9 +71,7 @@ class SearchProjectAPIView(APIView):
             name = request.query_params.get('name')
             project = Projects.objects.filter(subcategories_id=pk).filter(Q(name__icontains=name) |
                                                                           Q(subject__icontains=name))
-            print("PROJECT=======", project)
             serializer = SearchProjectSerializer(project, many=True)
-            print("SERIALIZER========", serializer)
             return Response({'message': "Siz izlagan malumot", 'data': serializer.data}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'message': "Siz izlagan malumot topilmadi", 'data': str(e)},

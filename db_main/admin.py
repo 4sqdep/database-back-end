@@ -2,10 +2,16 @@ from django.contrib import admin
 from .models import Categories, SubCategories, Projects, Files, APIRequestCount, APIRequestCountLog
 
 
+
 class CategoriesAdmin(admin.ModelAdmin):
+
     list_display = ['id', 'name', 'user', 'created_at']
     list_display_links = ['id', 'name']
     search_fields = ['id', 'name']
+    class Meta:
+        css = {
+            'all': ('static/css/admin_custom.css',),  # Maxsus CSS faylingizni qo'shasiz
+        }
 
 
 admin.site.register(Categories, CategoriesAdmin)

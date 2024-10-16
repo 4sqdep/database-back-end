@@ -1,0 +1,7 @@
+.select2-selection__rendered {
+    white-space: normal !important;  /* Matnni bir qatorga sig'dirishni o'chirish */
+    word-wrap: break-word !important; /* Matnni bo'laklab keyingi qatorga tushirish */
+    width: 100%;  /* Kenglikni maksimal qilib belgilang */
+    max-width: 500px;  /* Maksimal kenglikni boshqarish */
+    min-height: 36px;  /* Minimal balandlik belgilang, kerak bo'lsa o'zgartiring */
+}
