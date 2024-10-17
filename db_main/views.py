@@ -165,7 +165,7 @@ class AddChildAPIView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, pk=None):
         try:
-            subcategory = SubCategories.objects.get(id=pk)
+            subcategory = SubCategories.objects.get(parent_id=pk)
         except SubCategories.DoesNotExist:
             return Response({"message": "Bu id da Kategoriya topilmadi...."}, status=status.HTTP_404_NOT_FOUND)
         child_data = request.data.get('children')
