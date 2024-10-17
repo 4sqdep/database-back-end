@@ -85,7 +85,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'db_config.wsgi.application'
 
-DATABASE_URL = "postgresql://postgres:igreayLSFOdBtQxfFRylTkxOFoigRJzH@autorack.proxy.rlwy.net:43966/railway"
+DATABASE_URL = "postgresql://postgres:fdZkkOZywpDTjDwtclwIaDwnGWwmFRrw@junction.proxy.rlwy.net:12309/railway"
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
