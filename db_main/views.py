@@ -8,7 +8,7 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Categories, SubCategories, Projects
 from .serializers import (CategoriesSerializers, SubCategoriesSerializers, SubCategoriesChildrenSerializer, SubCategoriesCreateSerializer,
-                          ProjectsSerializer, GetCategorySerializer, GetProjectSerializer, SearchCategorySerializer)
+                          ProjectsSerializer, GetCategorySerializer, GetProjectSerializer, SearchCategorySerializer, ChildCreateSerializer)
 from .permission import IsNotStaffUserPermission
 from .d_serializers import SearchSubCategorySerializer
 
@@ -155,6 +155,30 @@ class AddSubCategoryAPIView(APIView):
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response({"message": "SubCategoriya muvaffaqiyatli qo‘shildi...", 'data': serializer.data},
+                        status=status.HTTP_201_CREATED)
+
+
+class AddChildAPIView(APIView):
+    """
+    Children qo'shish uchun view
+    """
+    permission_classes = [IsAuthenticated]
+    def post(self, request, pk=None):
+        try:
+            subcategory = SubCategories.objects.get(id=pk)
+        except SubCategories.DoesNotExist:
+            return Response({"message": "Bu id da Kategoriya topilmadi...."}, status=status.HTTP_404_NOT_FOUND)
+        child_data = request.data.get('children')
+        if not child_data:
+            return Response({"message": "Children yaratish shart......"}, status=status.HTTP_400_BAD_REQUEST)
+        for child in child_data:
+            child['subcategory'] = subcategory.id
+            serializer = ChildCreateSerializer(data=child)
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'message': "Children muvaffaqiyatli qo‘shildi...", 'data': serializer.data},
                         status=status.HTTP_201_CREATED)
 
 

@@ -102,3 +102,9 @@ class SubCategoriesCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubCategories
         fields = ['id', 'categories', 'name']
+
+
+class ChildCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubCategories
+        fields = ['id', 'name']
