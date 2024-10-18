@@ -165,21 +165,31 @@ class AddChildAPIView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, pk=None):
         try:
-            subcategory = SubCategories.objects.get(parent_id=pk)
+            parent_subcategory = SubCategories.objects.get(id=pk)
+            print("eeeeeee====", parent_subcategory)
         except SubCategories.DoesNotExist:
             return Response({"message": "Bu id da Kategoriya topilmadi...."}, status=status.HTTP_404_NOT_FOUND)
-        child_data = request.data.get('children')
-        if not child_data:
-            return Response({"message": "Children yaratish shart......"}, status=status.HTTP_400_BAD_REQUEST)
-        for child in child_data:
-            child['subcategory'] = subcategory.id
-            serializer = ChildCreateSerializer(data=child)
-            if serializer.is_valid():
-                serializer.save()
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'message': "Children muvaffaqiyatli qo‘shildi...", 'data': serializer.data},
-                        status=status.HTTP_201_CREATED)
+        request.data['parent'] = parent_subcategory.id
+        serializer = ChildCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+        # print("QQQQQQQQQQQQQ========", child_data)
+        # if not child_data:
+        #     return Response({"message": "Children yaratish shart......"}, status=status.HTTP_400_BAD_REQUEST)
+        # for child in child_data:
+        #     child['parent'] = parent_subcategory.id
+        #     serializer = ChildCreateSerializer(data=child)
+        #     if serializer.is_valid():
+        #         serializer.save()
+        #     else:
+        #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # return Response({'message': "Children muvaffaqiyatli qo‘shildi...", 'data': serializer.data},
+        #                 status=status.HTTP_201_CREATED)
 
 
 # class SubCategoriesCreateAPIView(CreateAPIView):
