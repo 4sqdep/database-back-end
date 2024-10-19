@@ -58,25 +58,18 @@ class PostProjectCreate(APIView):
         #Fayllarni alohida olish
         files = request.FILES.getlist('file.file')
         user = request.user
-        print('++++++++++++++++++++++++++++++++++', files)
         if not files:
             return Response({'error': 'No files were uploaded.'}, status=status.HTTP_400_BAD_REQUEST)
         files_data = []
         for idx, file in enumerate(files):
             file_file_code = request.data.getlist('file.file_code')[idx]
             files_data.append({'file': file, 'file_code': file_file_code})
-            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", file_file_code, files_data)
-            # if not file_file_code and file_file:
-            #     return Response({'message': f"{file.file_code} {file.file} malumotlari topilmadi"},
-            #                     status=status.HTTP_400_BAD_REQUEST)
-            # files_data.append({'file': file_file, 'file_code': file_file_code})
         project_data = {
             'subcategories': request.data.get('subcategories'),
             'name': request.data.get('name'),
             'subject': request.data.get('subject'),
             'files': files_data
         }
-        print("======================", project_data)
         serializer = ProjectsSerializer(data=project_data)
         if serializer.is_valid():
             serializer.save(user=user)
