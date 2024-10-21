@@ -22,7 +22,7 @@ class UserGetCategoriesAPIView(APIView):
     def get(self, request):
         try:
             user = request.user
-            category = Categories.objects.filter(user=user)
+            category = Categories.objects.filter(user=user).order_by('-created_at')
             serializer = GetCategorySerializer(category, many=True)
             return Response({'message': "Foydalanuvchining kategoriyalari", 'data': serializer.data},
                             status=status.HTTP_200_OK)
