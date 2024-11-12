@@ -1,14 +1,14 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 from django.db.models import Q
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Categories, SubCategories, Projects
-from .serializers import (CategoriesSerializers, SubCategoriesSerializers, SubCategoriesChildrenSerializer, SubCategoriesCreateSerializer,
-                          ProjectsSerializer, GetCategorySerializer, GetProjectSerializer, SearchCategorySerializer, ChildCreateSerializer)
+from .serializers import (CategoriesSerializers, SubCategoriesCreateSerializer, SearchCategorySerializer,
+                          ProjectsSerializer, GetCategorySerializer, GetProjectSerializer, ChildCreateSerializer)
 from .permission import IsNotStaffUserPermission
 from .d_serializers import SearchSubCategorySerializer
 
@@ -133,7 +133,6 @@ class AddSubCategoryAPIView(APIView):
     def post(self, request, pk=None):
         try:
             categories = Categories.objects.get(id=pk)
-            print("eeeeeee====", categories)
         except Categories.DoesNotExist:
             return Response({"message": "Bu id da Kategoriya topilmadi...."}, status=status.HTTP_404_NOT_FOUND)
         subcategories_data = request.data.get('subcategories')
@@ -141,7 +140,6 @@ class AddSubCategoryAPIView(APIView):
             return Response({"message": "Subkategoriya yaratish talab qilinadi..."}, status=status.HTTP_400_BAD_REQUEST)
         for sub in subcategories_data:
             sub['categories'] = categories.id
-            print("QQQQQQQQQQQ========", sub)
             serializer = SubCategoriesCreateSerializer(data=sub)
             if serializer.is_valid():
                 serializer.save()
@@ -159,7 +157,6 @@ class AddChildAPIView(APIView):
     def post(self, request, pk=None):
         try:
             parent_subcategory = SubCategories.objects.get(id=pk)
-            print("eeeeeee====", parent_subcategory)
         except SubCategories.DoesNotExist:
             return Response({"message": "Bu id da Kategoriya topilmadi...."}, status=status.HTTP_404_NOT_FOUND)
         request.data['parent'] = parent_subcategory.id
@@ -169,9 +166,6 @@ class AddChildAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-
-        # print("QQQQQQQQQQQQQ========", child_data)
         # if not child_data:
         #     return Response({"message": "Children yaratish shart......"}, status=status.HTTP_400_BAD_REQUEST)
         # for child in child_data:

@@ -10,7 +10,7 @@ class CategoriesAdmin(admin.ModelAdmin):
     search_fields = ['id', 'name']
     class Meta:
         css = {
-            'all': ('static/css/admin_custom.css',),  # Maxsus CSS faylingizni qo'shasiz
+            'all': ('static/css/admin_custom.css',),  #
         }
 
 

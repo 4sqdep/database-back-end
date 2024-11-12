@@ -44,10 +44,9 @@ class UserProfileAPIView(APIView):
 
     def post(self, request, pk=None):
         try:
-            if User.objects.filter(id=pk).exists():
-                return Response({'message': "Profil allaqachon mavjud, yangilang!"}, status=status.HTTP_400_BAD_REQUEST)
-
-            serializer = UserProfileSerializer(data=request.data)
+            profile = User.objects.get(id=pk)
+            serializer = UserProfileSerializer(profile, data=request.data, partial=True)
+            print("WWWWWWWWW", serializer)
             if serializer.is_valid():
                 serializer.save()
                 return Response({'message': "Profile toldirildi!", 'data': serializer.data}, status=status.HTTP_200_OK)

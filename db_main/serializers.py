@@ -28,8 +28,6 @@ class SubCategoriesSerializers(serializers.ModelSerializer):
         fields = ('id', 'categories', 'name')
 
 
-
-
 class SubCategoriesChildrenSerializer(serializers.ModelSerializer):
     """
     SubCategories modeliga Children bolalarni biriktirish
