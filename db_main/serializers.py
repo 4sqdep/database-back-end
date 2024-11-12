@@ -51,7 +51,7 @@ class SubCategoriesChildrenSerializer(serializers.ModelSerializer):
 class FilesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Files
-        fields = ['file_code', 'file']
+        fields = ['file_code', 'file', 'created_at']
 
 
 class ProjectsSerializer(serializers.ModelSerializer):
@@ -61,7 +61,7 @@ class ProjectsSerializer(serializers.ModelSerializer):
         fields = ['subcategories', 'name', 'subject', 'files']
 
     def create(self, validated_data):
-        files_data = self.context['request'].data.getlist('files')
+        files_data = validated_data.pop('files')
         project = Projects.objects.create(**validated_data)
         for file_data in files_data:
             Files.objects.create(project=project, **file_data)

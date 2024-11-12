@@ -70,7 +70,7 @@ class PostProjectCreate(APIView):
             'subject': request.data.get('subject'),
             'files': files_data
         }
-        serializer = ProjectsSerializer(data=project_data,  context={'request': request})
+        serializer = ProjectsSerializer(data=project_data)
         if serializer.is_valid():
             serializer.save(user=user)
             return Response({'message': "Malumot qo'shildi", 'data': serializer.data}, status=status.HTTP_200_OK)
