@@ -61,7 +61,7 @@ class ProjectsSerializer(serializers.ModelSerializer):
         fields = ['subcategories', 'name', 'subject', 'files']
 
     def create(self, validated_data):
-        files_data = validated_data.pop('files')
+        files_data = self.context['request'].data.getlist('files')
         project = Projects.objects.create(**validated_data)
         for file_data in files_data:
             Files.objects.create(project=project, **file_data)
