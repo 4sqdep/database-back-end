@@ -85,8 +85,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'db_config.wsgi.application'
 
-# DATABASE_URL = "postgresql://postgres:fdZkkOZywpDTjDwtclwIaDwnGWwmFRrw@junction.proxy.rlwy.net:12309/railway"
-DATABASE_URL = "postgresql://loyiha_owner:ehcrQ91TKUPx@ep-restless-truth-a5tpkldx.us-east-2.aws.neon.tech/loyiha?sslmode=require"
+DATABASE_URL = "postgresql://postgres:fdZkkOZywpDTjDwtclwIaDwnGWwmFRrw@junction.proxy.rlwy.net:12309/railway"
+# DATABASE_URL = "postgresql://loyiha_owner:ehcrQ91TKUPx@ep-restless-truth-a5tpkldx.us-east-2.aws.neon.tech/loyiha?sslmode=require"
 
 
 # Database
