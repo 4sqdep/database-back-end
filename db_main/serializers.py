@@ -58,7 +58,7 @@ class ProjectsSerializer(serializers.ModelSerializer):
     files = FilesSerializer(many=True, write_only=True)
     class Meta:
         model = Projects
-        fields = ['subcategories', 'name', 'subject', 'files']
+        fields = ['id', 'subcategories', 'name', 'subject', 'files']
 
     def create(self, validated_data):
         files_data = validated_data.pop('files')
