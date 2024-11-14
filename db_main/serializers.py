@@ -63,8 +63,8 @@ class ProjectsSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         files_data = validated_data.pop('files')
         project = Projects.objects.create(**validated_data)
-        for file_data in files_data:
-            Files.objects.create(project=project, **file_data)
+        files = [Files(project=project, **file_data) for file_data in files_data]
+        Files.objects.bulk_create(files)
         return project
 
 
