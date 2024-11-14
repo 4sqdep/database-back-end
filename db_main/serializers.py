@@ -106,3 +106,9 @@ class ChildCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubCategories
         fields = ['id', 'name', 'categories', 'parent']
+
+
+class GetFilesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Files
+        fields = ['file_code', 'file', 'created_at']

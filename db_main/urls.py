@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import (CategoriesCreateAPIView, UserGetCategoriesAPIView, PostProjectCreate, GetProjectAPIView,
-                    SearchCategoryAPIView, SearchSubCategoryAPIView, AddSubCategoryAPIView, AddChildAPIView)
+                    SearchCategoryAPIView, SearchSubCategoryAPIView, AddSubCategoryAPIView, AddChildAPIView,
+                    GetPrpjectFilesAPIView)
 from .director import GetCategoriesAPIView, GetSubCategoriesAPIView, GetChildSubCategoriesAPIView, SearchProjectAPIView
 
 
@@ -23,5 +24,7 @@ urlpatterns = [
 
     path('category-search/', SearchCategoryAPIView.as_view(), name='category-search'),
 
-    path('subcategory-search/<int:pk>/', SearchSubCategoryAPIView.as_view(), name='subcategory-search')
+    path('subcategory-search/<int:pk>/', SearchSubCategoryAPIView.as_view(), name='subcategory-search'),
+
+    path('get-files/<int:pk>/', GetPrpjectFilesAPIView.as_view(), name='get-files')
 ]

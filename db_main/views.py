@@ -6,9 +6,10 @@ from rest_framework.exceptions import PermissionDenied
 from django.db.models import Q
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
-from .models import Categories, SubCategories, Projects
+from .models import Categories, SubCategories, Projects, Files
 from .serializers import (CategoriesSerializers, SubCategoriesCreateSerializer, SearchCategorySerializer,
-                          ProjectsSerializer, GetCategorySerializer, GetProjectSerializer, ChildCreateSerializer)
+                          ProjectsSerializer, GetCategorySerializer, GetProjectSerializer, ChildCreateSerializer,
+                          GetFilesSerializer, FilesSerializer)
 from .permission import IsNotStaffUserPermission
 from .d_serializers import SearchSubCategorySerializer
 
@@ -29,7 +30,6 @@ class UserGetCategoriesAPIView(APIView):
         except Categories.DoesNotExist:
             return Response({'message': "Foydalanuvchida kategoriya mavjut emas", 'data': serializer.errors},
                             status=status.HTTP_400_BAD_REQUEST)
-
 
 
 class CategoriesCreateAPIView(CreateAPIView):
@@ -70,10 +70,12 @@ class PostProjectCreate(APIView):
             'subject': request.data.get('subject'),
             'files': files_data
         }
-        serializer = ProjectsSerializer(data=project_data)
+        serializer = ProjectsSerializer(data=project_data, context={'request': request})
         if serializer.is_valid():
-            serializer.save(user=user)
-            return Response({'message': "Malumot qo'shildi", 'data': serializer.data}, status=status.HTTP_200_OK)
+            project = serializer.save(user=user)
+            response_serializer = ProjectsSerializer(project, context={'request': request})
+            return Response({'message': "Malumot qo'shildi", 'data': response_serializer.data},
+                            status=status.HTTP_200_OK)
         return Response({'xato': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -179,26 +181,16 @@ class AddChildAPIView(APIView):
         #                 status=status.HTTP_201_CREATED)
 
 
-# class SubCategoriesCreateAPIView(CreateAPIView):
-#     """
-#     Foydalanuvchi Kategoriyalarni tanlagan holda SubCategoriya yaratish uchun CreateAPIView
-#     """
-#     permission_classes = [IsAuthenticated]
-#     queryset = SubCategories.objects.all()
-#     serializer_class = SubCategoriesSerializers
-#
-#     def perform_create(self, serializer):
-#         if self.request.user.is_designer == True:
-#             serializer.save()
-#         else:
-#             raise PermissionDenied(detail="Faqat Loyihachilar toifalarni yaratishi mumkin..")
+class GetPrpjectFilesAPIView(APIView):
+    """Loyihaga tegishli fayllarni olish uchun view"""
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
 
-
-
-
-
-# class CreateChildrenCreateAPIView(CreateAPIView):
-#     """Ota kategoriyaga bola kategoriyalarni post qilish"""
-#     permission_classes = [IsAuthenticated]
-#     queryset = SubCategories.objects.all()
-#     serializer_class = SubCategoriesChildrenSerializer
+    def get(self, request, pk=None):
+        try:
+            files = Files.objects.filter(project_id=pk)
+            serializer = FilesSerializer(files, many=True)
+            return Response({'message': "Barcha fayllar . . . . ", 'data': serializer.data},
+                            status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'message': "Malumot topilmadi", 'data': str(e)}, status=status.HTTP_400_BAD_REQUEST)
