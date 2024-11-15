@@ -409,7 +409,10 @@ SIMPLE_JWT = {
 
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-
+CORS_ALLOWED_ORIGINS = [
+    "https://database-back-end-production.up.railway.app",
+    "http://localhost:8000",  # Test uchun
+]
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'content-type',
