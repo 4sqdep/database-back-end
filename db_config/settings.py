@@ -85,19 +85,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'db_config.wsgi.application'
 
-DATABASE_URL = "postgresql://postgres:fdZkkOZywpDTjDwtclwIaDwnGWwmFRrw@junction.proxy.rlwy.net:12309/railway"
-# DATABASE_URL = "postgresql://loyiha_owner:ehcrQ91TKUPx@ep-restless-truth-a5tpkldx.us-east-2.aws.neon.tech/loyiha?sslmode=require"
+# DATABASE_URL = "postgresql://postgres:fdZkkOZywpDTjDwtclwIaDwnGWwmFRrw@junction.proxy.rlwy.net:12309/railway"
+# DATABASE_URL = "p69776963859-u5pkyn@gcp-sa-cloud-sql.iam.gserviceaccount.com"
 
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-
-
-
 DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1000)
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'designergidro',
+        'USER': 'gidroqurilish',
+        'PASSWORD': 'gidro2024!@#',
+        'HOST': '192.168.1.144',  # PostgreSQL serverining IP-manzili
+        'PORT': '5432',  # PostgreSQL porti (standart: 5432)
+    }
 }
+
+
+# DATABASES = {
+#     'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1000)
+# }
 
 
 
