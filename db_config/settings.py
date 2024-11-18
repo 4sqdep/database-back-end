@@ -91,10 +91,10 @@ WSGI_APPLICATION = 'db_config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'designergidro',
-        'USER': 'gidroqurilish',
-        'PASSWORD': 'gidro2024!@#',
-        'HOST': '192.168.1.144',  # PostgreSQL serverining IP-manzili
+        'NAME': 'postgres',
+        'USER': 'erkin',
+        'PASSWORD': 'Erkin_44',
+        'HOST': 'gidrodb.c58s68qq4wn9.us-east-1.rds.amazonaws.com',  # PostgreSQL serverining IP-manzili
         'PORT': '5432',  # PostgreSQL porti (standart: 5432)
     }
 }
