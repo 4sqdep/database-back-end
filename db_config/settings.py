@@ -88,10 +88,6 @@ WSGI_APPLICATION = 'db_config.wsgi.application'
 # DATABASE_URL = "postgresql://postgres:fdZkkOZywpDTjDwtclwIaDwnGWwmFRrw@junction.proxy.rlwy.net:12309/railway"
 # DATABASE_URL = "p69776963859-u5pkyn@gcp-sa-cloud-sql.iam.gserviceaccount.com"
 
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-# server
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
