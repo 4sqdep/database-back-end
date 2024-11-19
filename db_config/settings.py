@@ -406,15 +406,8 @@ SIMPLE_JWT = {
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 CORS_ALLOWED_ORIGINS = [
-    "https://database-back-end-production.up.railway.app",
+    "http://54.88.23.55",
     "http://localhost:8000",  # Test uchun
-]
-
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'content-type',
-    'authorization',
-    'x-requested-with',
-    'utc-offset',  # Qo'shilgan maxsus sarlavha
 ]
 
 USE_X_FORWARDED_HOST = True
@@ -422,7 +415,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
-    "https://database-back-end-production.up.railway.app",
+    "http://54.88.23.55",
 ]
 ###################################################################
 # CORS
@@ -430,9 +423,16 @@ CSRF_TRUSTED_ORIGINS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = list(default_headers) + ['*']
+# CORS_ALLOW_HEADERS = list(default_headers) + [
+#     'content-type',
+#     'authorization',
+#     'x-requested-with',
+#     'utc-offset',  # Qo'shilgan maxsus sarlavha
+# ]
 
-
-HOST = "https://database-back-end-production.up.railway.app"
+HOST = "http://54.88.23.55"
+# HOST = "https://database-back-end-production.up.railway.app"
 
 
 
