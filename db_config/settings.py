@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-5u8m%(^r4ktj42pm8uf!fm!4wbk9@bvpn-5x+nvijq_oq@2qrr
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['http://hccs.uz', 'hccs.uz', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['http://loyiha.hccs.uz', 'loyiha.hccs.uz', '127.0.0.1', 'localhost']
 
 
 
@@ -406,7 +406,7 @@ SIMPLE_JWT = {
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 CORS_ALLOWED_ORIGINS = [
-    "http://hccs.uz",
+    "http://loyiha.hccs.uz",
     "http://localhost:8000",  # Test uchun
 ]
 
@@ -415,7 +415,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
-    "http://hccs.uz",
+    "http://loyiha.hccs.uz",
 ]
 ###################################################################
 # CORS
@@ -431,7 +431,7 @@ CORS_ALLOW_HEADERS = list(default_headers) + ['*']
 #     'utc-offset',  # Qo'shilgan maxsus sarlavha
 # ]
 
-HOST = "http://hccs.uz"
+HOST = "http://loyiha.hccs.uz"
 # HOST = "https://database-back-end-production.up.railway.app"
 
 
