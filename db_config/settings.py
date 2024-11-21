@@ -85,8 +85,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'db_config.wsgi.application'
 
-# DATABASE_URL = "postgresql://postgres:fdZkkOZywpDTjDwtclwIaDwnGWwmFRrw@junction.proxy.rlwy.net:12309/railway"
-# DATABASE_URL = "p69776963859-u5pkyn@gcp-sa-cloud-sql.iam.gserviceaccount.com"
 
 DATABASES = {
     'default': {
@@ -99,10 +97,6 @@ DATABASES = {
     }
 }
 
-
-# DATABASES = {
-#     'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1000)
-# }
 
 
 
