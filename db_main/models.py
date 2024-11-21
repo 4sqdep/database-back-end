@@ -78,7 +78,6 @@ class Files(models.Model):
     class Meta:
         verbose_name = "Fayil"
         verbose_name_plural = "Loyiha Fayillari"
-        indexes = [models.Index(fields=["file_code"])]
 
 
 
