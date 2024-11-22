@@ -417,15 +417,15 @@ CSRF_TRUSTED_ORIGINS = [
 # CORS
 ###################################################################
 
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = list(default_headers) + ['*']
-# CORS_ALLOW_HEADERS = list(default_headers) + [
-#     'content-type',
-#     'authorization',
-#     'x-requested-with',
-#     'utc-offset',  # Qo'shilgan maxsus sarlavha
-# ]
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'content-type',
+    'authorization',
+    'x-requested-with',
+    'utc-offset',  # Qo'shilgan maxsus sarlavha
+]
 
 HOST = "http://loyiha.hccs.uz"
 # HOST = "https://database-back-end-production.up.railway.app"
